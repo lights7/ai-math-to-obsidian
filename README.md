@@ -2,7 +2,7 @@
 
 This is a simple plugin can copy ChatGPT and Grok's Math equations to Obsidian. 
 
-It was forked from [Darko Pejakovic's Convert KaTeX to MathJax plugin]{https://github.com/pejakovic/obsidian-convert-katex-to-mathjax}, which can copy ChatGPT's KaTeX into Obsidian's MathJax.
+It was forked from [Darko Pejakovic's Convert KaTeX to MathJax plugin](https://github.com/pejakovic/obsidian-convert-katex-to-mathjax), which can copy ChatGPT's KaTeX into Obsidian's MathJax.
 
 ---
 
@@ -82,7 +82,7 @@ Contributions, suggestions, and bug reports are welcome! Feel free to submit a p
 
 ## **Support**
 
-If you find this plugin helpful and would like to support its development, consider buying me a coffee:
+If you find this plugin helpful and would like to support its development, you can consider buying Darko Pejakovic a coffee, because this code is based on his original plugin:
 
 [![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/darkopejakovic)
 
