@@ -1,8 +1,8 @@
 # Obsidian Plugin: Copy Ai Math into Obsidian
 
-This is a simple plugin can copy ChatGPT and Grok's Math equations to Obsidian. 
+This is a simple plugin can copy ChatGPT, Liner and Grok's Math equations to Obsidian. 
 
-It was forked from Darko Pejakovic's [Convert KaTeX to MathJax plugin](https://github.com/pejakovic/obsidian-convert-katex-to-mathjax), which can copy ChatGPT's KaTeX into Obsidian's MathJax.
+It was forked from Darko Pejakovic's [Convert KaTeX to MathJax plugin](https://github.com/pejakovic/obsidian-convert-katex-to-mathjax), which can copy ChatGPT 's KaTeX into Obsidian's MathJax.
 
 ---
 

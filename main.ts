@@ -93,7 +93,17 @@ export default class Katex2MathjaxConverterPlugin extends Plugin {
  * @returns The converted string with MathJax formatted text.
  */
 function convertKatexToMathJax(input: string): string {
-if (input.includes("\\\[") || input.includes("\\\(")) { // from ChatGPT
+if (input.includes("\\\\[") || input.includes("\\\\(")) { // from Liner 
+  input = input.replace(/\\\\\((.*?)\\\\\)/g, (_match, p1) => {
+    return `$${p1.trim()}$`;
+  });
+  // Replace \[\text{sample}\] with $$\text{sample}$$
+  input = input.replace(/\\\\\[(.*?)\\\\\]/gs, (_match, p1) => {
+    return `\n$$\n${p1.trim()}\n$$\n`;
+  });
+  return input; // return ChatGPT
+
+}else if (input.includes("\\\[") || input.includes("\\\(")) { // from ChatGPT
   input = input.replace(/\\\((.*?)\\\)/g, (_match, p1) => {
     return `$${p1.trim()}$`;
   });
