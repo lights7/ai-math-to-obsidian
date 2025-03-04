@@ -93,15 +93,70 @@ export default class Katex2MathjaxConverterPlugin extends Plugin {
  * @returns The converted string with MathJax formatted text.
  */
 function convertKatexToMathJax(input: string): string {
-  // Replace \(\text{sample}\) with $\text{sample}$
+//  input = input.replace(/^(.*?)$|/^(.*?)$/gm, function(p1,p2) {
+  m=0; // previous line is math if 1, no math if 0
+  p0=""; // previous line
+  n="\n";
+ // const lines=input.split(/\r?\n/);
+//  for (const line of lines) {
+//    console.log(line);
+//  }
+  input = input.replace(/^(.*?)$/gm, function(p1) {
+    const terms = ["\\", "_", "^", "=", "+", "/"];
+    p0=p1;
+    console.log("p1", p1.length);
+    console.log("p0", p0.length);
+    if (p1.length == 1 && m==0) { // math this line, no math previous
+//      p1=p1.replace(/\n|\r/g,'');
+      p1=p1.replace(/^/,"W");
+//      p1=p1.replace(/[\n\t\r]/,'B');
+      console.log(p1.trim());
+      m=1;
+      return `$${p1.trim()}$`;
+    } else if (p1.length <= 20 && terms.some((term) => p1.includes(term))) {
+ //     p1=p1.replace(/^\s+|\s+$/g);
+//      console.log(p1.trim());
+//      p1=p1.replace(/\n|\r/g,'');
+//      p1=p1.replace(/[\n+]/g,'');
+      p1=p1.replace(/$/g,'');
+      m=1;
+      return `$${p1.trim()}$`;
+//      return `${p0.trim()} $${p1.trim()}$`;
+//      return `$${p1.trim()}$`;
+    } else if (p1.length > 20 && terms.some((term) => p1.includes(term))) {
+      m=2;
+      return `$$${p1.trim()}$$`;
+//      return `${p0} $${p1.trim()}$`;
+//      return `$$${p1.trim()}$$`;
+    } else {
+      m=0
+//      p1=p1.replace(/[\n\t\r]/g,'');
+      p1=p1.replace(/ $/,' ');
+      if (m==1){ //previous line is short math, this line is not math
+        return `${p1}`;
+      }else if(m==2){
+        return `${n} ${p1}`;
+      }else{ //m=0 previous and this line are not math
+        return `${p1}`;
+//        return `${n} ${p1}`;
+ 
+      }
+//      p1=p1.replace(/\n/g,"");
+      m=0;
+      return `${p2} $${p1}$`;
+//      return `${p1.trim()}`;
+    }
+  });
+
   input = input.replace(/\\\((.*?)\\\)/g, (_match, p1) => {
+//    console.log("p1",p1.trim());
     return `$${p1.trim()}$`;
   });
   // Replace \[\text{sample}\] with $$\text{sample}$$
   input = input.replace(/\\\[(.*?)\\\]/gs, (_match, p1) => {
+//    console.log("p1",p1.trim());
     return `\n$$\n${p1.trim()}\n$$\n`;
   });
-
   return input;
 }
 
