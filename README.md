@@ -1,24 +1,26 @@
-# Obsidian Plugin: Convert KaTeX to MathJax
+# Obsidian Plugin: Copy Ai Math into Obsidian
 
-A simple plugin for [Obsidian](https://obsidian.md) that converts KaTeX notation to MathJax, ensuring seamless use of mathematical expressions copied from sources like OpenAI's ChatGPT.
+This is a simple plugin can copy ChatGPT and Grok's Math equations to Obsidian. 
+
+It was forked from [Darko Pejakovic's Convert KaTeX to MathJax plugin]{https://github.com/pejakovic/obsidian-convert-katex-to-mathjax}, which can copy ChatGPT's KaTeX into Obsidian's MathJax.
 
 ---
 
 ## **Why This Plugin?**
 
-  ChatGPT and other platforms often render mathematical expressions using [**KaTeX**](https://katex.org), while Obsidian uses [**MathJax**](https://www.mathjax.org) for mathematical notation. This discrepancy can lead to formatting issues when copying and pasting content.
+  ChatGPT and other platforms often render mathematical expressions using [**KaTeX**](https://katex.org) or just Latex, while Obsidian uses [**MathJax**](https://www.mathjax.org) for mathematical notation. This discrepancy can lead to formatting issues when copying and pasting content.
 
-This plugin eliminates the hassle by automatically converting KaTeX expressions to MathJax, making it easier to integrate ChatGPT-generated content or other KaTeX-based math into your Obsidian vault.
+This plugin eliminates the hassle by automatically converting either Latex or KaTeX expressions to MathJax, making it easier to integrate ChatGPT or Grok generated content or other KaTeX-based math into your Obsidian vault.
 
 ---
 
 ## **Features**
 
-- **Default paste conversion**: Automatically converts KaTeX expressions on paste (toggleable via settings).
+- **Default paste conversion**: Automatically converts Katex or Latex
 - **Command Palette Actions**:
-  - **Paste with conversion**: Manually paste KaTeX content with MathJax conversion applied.
-  - **Convert current text file**: Convert all KaTeX expressions in the current note to MathJax.
-  - **Convert all files**: Batch-convert KaTeX expressions in every markdown file across your vault.
+  - **Paste with conversion**: Manually paste KaTeX or Latex content with MathJax conversion applied.
+  - **Convert current text file**: Convert all KaTeX or Latex expressions in the current note to MathJax.
+  - **Convert all files**: Batch-convert Latex or KaTeX expressions in every markdown file across your vault.
 - Easy toggle to enable or disable automatic conversion.
 - Works seamlessly with clipboard operations.
 
@@ -41,13 +43,13 @@ This plugin eliminates the hassle by automatically converting KaTeX expressions 
 
 ### **Default Paste Behavior**
 1. Toggle "Enable default paste conversion" in the plugin settings.
-2. Simply paste copied KaTeX content into your Obsidian editor—it's automatically converted to MathJax.
+2. Simply paste copied ChatGPT or Grok content into your Obsidian editor—it's automatically converted to MathJax.
 
 ### **Command Palette Actions**
 Open the Command Palette (`Ctrl + P` / `Cmd + P`) and search for the following commands:
 - **Paste with conversion**: Pastes clipboard content with conversion applied.
-- **Convert current text file**: Converts all KaTeX expressions in the current note to MathJax.
-- **Convert all files**: Scans and converts KaTeX expressions in all markdown files across your vault.
+- **Convert current text file**: Converts all KaTeX and Latex expressions in the current note to MathJax.
+- **Convert all files**: Scans and converts KaTeX and Latex expressions in all markdown files across your vault.
 
 ---
 

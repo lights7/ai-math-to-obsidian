@@ -1,11 +1,11 @@
 {
-	"id": "convert-katex-to-mathjax",
-	"name": "KaTeX to MathJax",
-	"version": "1.0.4",
+	"id": "convert-ai-math-to-mathjax",
+	"name": "Ai to Obsidian",
+	"version": "1.0.5",
 	"minAppVersion": "0.15.0",
 	"description": "Converts KaTeX format to MathJax format.",
 	"author": "Obsidian",
-	"authorUrl": "https://github.com/pejakovic",
+	"authorUrl": "https://github.com/lights7",
 	"fundingUrl": "",
 	"isDesktopOnly": false
 }
