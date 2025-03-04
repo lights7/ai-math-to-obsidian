@@ -93,71 +93,50 @@ export default class Katex2MathjaxConverterPlugin extends Plugin {
  * @returns The converted string with MathJax formatted text.
  */
 function convertKatexToMathJax(input: string): string {
-//  input = input.replace(/^(.*?)$|/^(.*?)$/gm, function(p1,p2) {
-  m=0; // previous line is math if 1, no math if 0
-  p0=""; // previous line
-  n="\n";
- // const lines=input.split(/\r?\n/);
-//  for (const line of lines) {
-//    console.log(line);
-//  }
-  input = input.replace(/^(.*?)$/gm, function(p1) {
-    const terms = ["\\", "_", "^", "=", "+", "/"];
-    p0=p1;
-    console.log("p1", p1.length);
-    console.log("p0", p0.length);
-    if (p1.length == 1 && m==0) { // math this line, no math previous
-//      p1=p1.replace(/\n|\r/g,'');
-      p1=p1.replace(/^/,"W");
-//      p1=p1.replace(/[\n\t\r]/,'B');
-      console.log(p1.trim());
-      m=1;
-      return `$${p1.trim()}$`;
-    } else if (p1.length <= 20 && terms.some((term) => p1.includes(term))) {
- //     p1=p1.replace(/^\s+|\s+$/g);
-//      console.log(p1.trim());
-//      p1=p1.replace(/\n|\r/g,'');
-//      p1=p1.replace(/[\n+]/g,'');
-      p1=p1.replace(/$/g,'');
-      m=1;
-      return `$${p1.trim()}$`;
-//      return `${p0.trim()} $${p1.trim()}$`;
-//      return `$${p1.trim()}$`;
-    } else if (p1.length > 20 && terms.some((term) => p1.includes(term))) {
-      m=2;
-      return `$$${p1.trim()}$$`;
-//      return `${p0} $${p1.trim()}$`;
-//      return `$$${p1.trim()}$$`;
-    } else {
-      m=0
-//      p1=p1.replace(/[\n\t\r]/g,'');
-      p1=p1.replace(/ $/,' ');
-      if (m==1){ //previous line is short math, this line is not math
-        return `${p1}`;
-      }else if(m==2){
-        return `${n} ${p1}`;
-      }else{ //m=0 previous and this line are not math
-        return `${p1}`;
-//        return `${n} ${p1}`;
- 
-      }
-//      p1=p1.replace(/\n/g,"");
-      m=0;
-      return `${p2} $${p1}$`;
-//      return `${p1.trim()}`;
-    }
-  });
-
+if (input.includes("\\\[") || input.includes("\\\(")) { // from ChatGPT
   input = input.replace(/\\\((.*?)\\\)/g, (_match, p1) => {
-//    console.log("p1",p1.trim());
     return `$${p1.trim()}$`;
   });
   // Replace \[\text{sample}\] with $$\text{sample}$$
   input = input.replace(/\\\[(.*?)\\\]/gs, (_match, p1) => {
-//    console.log("p1",p1.trim());
     return `\n$$\n${p1.trim()}\n$$\n`;
   });
-  return input;
+  return input; // return ChatGPT
+
+}else{ // input from Grok
+  m=0; // previous line is equ if 1, no math equ if 0
+  all=""
+  const lines=input.split(/\r?\n/);
+  for (p1 of lines) {
+    const terms = ["\\", "_", "^", "=", "+", "/"];
+    if (p1.length == 1 && m==0) { // this line is short equ, no equ in previous
+      all=all+"\$"+p1+"\$";
+      m=1;
+    } else if (p1.length <= 20 && terms.some((term) => p1.includes(term))) {
+      p1=p1.replace(/$/g,'');
+      all=all+"\$"+p1+"\$";
+      m=1;
+    } else if (p1.length > 20 && terms.some((term) => p1.includes(term))) {
+      all=all+"\$\$"+p1;
+      m=2;
+    } else { // this line is not equation
+      if (m==1){ //previous line is short equ, this line is not equ 
+        all=all+p1;
+      }else if(m==2){ //previous line is long equ, this line is not
+        if(p1[0]==',' || p1[0]=='.'){
+          all=all+"\,\$\$"+p1.slice(2,p1.length);
+        }else{
+          all=all+"\$\$"+p1;
+        }
+      }else{ //m=0 previous and this line are not math
+        all=all+p1;
+      }
+      m=0
+    }
+  };
+  input=all;
+  return input; // return Grok
+}
 }
 
 /**
