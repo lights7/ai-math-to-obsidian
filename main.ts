@@ -153,7 +153,6 @@ if (input.includes("\\\\[") || input.includes("\\\\(")) { // from Liner
       m=0
     }
   }
-//    p0=p1; //p0 is previous line
 
 }else{ // input from Llama and Claude
   m=0; // previous line is equ if 1, no math equ if 0
@@ -167,7 +166,7 @@ if (input.includes("\\\\[") || input.includes("\\\\(")) { // from Liner
     len=p1.length;
     //console.log("removed space",p1.replace(/\ +\ |\ -\ |\ =\ /g,""))
     all_space_len=(p1.match(new RegExp(" ", "g")) || []).length;
-    p1_no_space=p1.replaceAll(" + ", '').replaceAll(" - ",'').replaceAll(" = ",'');
+    p1_no_space=p1.replaceAll(" + ", '').replaceAll(" - ",'').replaceAll(" = ",''); // remove certain space  and +-=
     str_space_len=(p1_no_space.match(new RegExp(" ", "g")) || []).length;
     slash_num=(p1_no_space.match(/\\/g) || []).length;
     sub_num=(p1_no_space.match(/\_/g) || []).length;
