@@ -93,6 +93,7 @@ export default class Katex2MathjaxConverterPlugin extends Plugin {
  * @returns The converted string with MathJax formatted text.
  */
 function convertKatexToMathJax(input: string): string {
+const terms = ["\\", "_", "^", "=", "+", "/","\∂","\√"];
 if (input.includes("\\\\[") || input.includes("\\\\(")) { // from Liner 
   input = input.replace(/\\\\\((.*?)\\\\\)/g, (_match, p1) => {
     return `$${p1.trim()}$`;
@@ -113,34 +114,94 @@ if (input.includes("\\\\[") || input.includes("\\\\(")) { // from Liner
   });
   return input; // return ChatGPT
 
-}else{ // input from Grok
+}else if( input.includes("\\")) {    // input from Grok
   m=0; // previous line is equ if 1, no math equ if 0
   all=""
+  equ = 0;
+  math = 0;
+  string_math_space_ratio = 0.75;
+  math_string_ratio = 0.1;
   const lines=input.split(/\r?\n/);
   for (p1 of lines) {
-    const terms = ["\\", "_", "^", "=", "+", "/"];
-    if (p1.length == 1 && m==0) { // this line is short equ, no equ in previous
+    len=p1.length;
+    //console.log("removed space",p1.replace(/\ +\ |\ -\ |\ =\ /g,""))
+/*    if(str_space_len/all_space_len>string_math_space_ratio && (slash_num+sub_num)<3){
+      math=0;
+    }else{
+      math=1;
+    }
+*/
+    if(p1.includes("=")){
+       equ = 1;
+    }else{
+       equ = 0;
+    }
+
+    if (len == 1 && m==0) { // this line is short equ, no equ in previous
       all=all+"\$"+p1+"\$";
       m=1;
-    } else if (p1.length <= 20 && terms.some((term) => p1.includes(term))) {
-      p1=p1.replace(/$/g,'');
+    } else if (len < 12 && terms.some((term) => p1.includes(term))) {
       all=all+"\$"+p1+"\$";
       m=1;
-    } else if (p1.length > 20 && terms.some((term) => p1.includes(term))) {
-      all=all+"\$\$"+p1;
+    } else if (equ == 0 && len >= 12 && len<=20 && terms.some((term) => p1.includes(term))) {
+      all=all+"\$"+p1+"\$";
+      m=1;
+    } else if (equ == 1 && len >= 12 && terms.some((term) => p1.includes(term))) {
+      all=all+"\$\$"+p1+"\$\$";
       m=2;
     } else { // this line is not equation
-      if (m==1){ //previous line is short equ, this line is not equ 
         all=all+p1;
-      }else if(m==2){ //previous line is long equ, this line is not
-        if(p1[0]==',' || p1[0]=='.'){
-          all=all+"\,\$\$"+p1.slice(2,p1.length);
-        }else{
-          all=all+"\$\$"+p1;
-        }
-      }else{ //m=0 previous and this line are not math
-        all=all+p1;
-      }
+      m=0
+    }
+  }
+//    p0=p1; //p0 is previous line
+
+}else{ // input from Llama and Claude
+  m=0; // previous line is equ if 1, no math equ if 0
+  all=""
+  equ = 0;
+  math = 0;
+  string_math_space_ratio = 0.75;
+  math_string_ratio = 0.1;
+  const lines=input.split(/\r?\n/);
+  for (p1 of lines) {
+    len=p1.length;
+    //console.log("removed space",p1.replace(/\ +\ |\ -\ |\ =\ /g,""))
+    all_space_len=(p1.match(new RegExp(" ", "g")) || []).length;
+    p1_no_space=p1.replaceAll(" + ", '').replaceAll(" - ",'').replaceAll(" = ",'');
+    str_space_len=(p1_no_space.match(new RegExp(" ", "g")) || []).length;
+    slash_num=(p1_no_space.match(/\\/g) || []).length;
+    sub_num=(p1_no_space.match(/\_/g) || []).length;
+    console.log(p1_no_space,str_space_len,all_space_len,slash_num,sub_num,len)
+    if(str_space_len/all_space_len>string_math_space_ratio && (slash_num+sub_num)<3){
+      math=0;
+    }else{
+      math=1;
+    }
+
+    if(p1.includes("=")){
+       equ = 1;
+    }else{
+       equ = 0;
+    }
+
+    if (len == 1 && m==0) { // this line is short equ, no equ in previous
+      all=all+"\$"+p1+"\$";
+      m=1;
+    } else if (len < 12 && terms.some((term) => p1.includes(term))) {
+      all=all+"\$"+p1+"\$";
+      m=1;
+    } else if (equ == 0 && len >= 12 && len<=20 && terms.some((term) => p1.includes(term))) {
+      all=all+"\$"+p1+"\$";
+      m=1;
+    } else if (math == 0 && equ == 1 && len >= 12 && terms.some((term) => p1.includes(term))) {
+      all=all+p1;
+      m=0;
+    } else if (math == 1 && equ == 1 && len >= 12 && terms.some((term) => p1.includes(term))) {
+      all=all+"\$\$"+p1+"\$\$";
+      m=2;
+    } else { // this line is not equation
+        all=all+p1+'\n';
       m=0
     }
   };

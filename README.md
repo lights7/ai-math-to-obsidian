@@ -58,7 +58,7 @@ Open the Command Palette (`Ctrl + P` / `Cmd + P`) and search for the following c
 If you'd like to make changes or contribute:
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-repo/convert-katex-to-mathjax.git
+   git clone https://github.com/lights7/convert-katex-to-mathjax.git
    ```
 2. Ensure your Node.js version is at least 16:
    ```bash
