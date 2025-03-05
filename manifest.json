@@ -1,9 +1,9 @@
 {
-	"id": "convert-ai-math-to-mathjax",
+	"id": "convert-ai-math-to-obsidian",
 	"name": "Ai to Obsidian",
-	"version": "1.0.5",
+	"version": "1.0.7",
 	"minAppVersion": "0.15.0",
-	"description": "Converts KaTeX format to MathJax format.",
+	"description": "Converts Ai Math to Obsidian.",
 	"author": "Obsidian",
 	"authorUrl": "https://github.com/lights7",
 	"fundingUrl": "",
