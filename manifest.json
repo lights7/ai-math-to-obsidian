@@ -1,10 +1,10 @@
 {
 	"id": "convert-ai-math-to-obsidian",
-	"name": "Ai to Obsidian",
+	"name": "Ai Math to Obsidian",
 	"version": "1.0.7",
 	"minAppVersion": "0.15.0",
 	"description": "Converts Ai Math to Obsidian.",
-	"author": "Obsidian",
+	"author": "Darko Pejakovic and lights7",
 	"authorUrl": "https://github.com/lights7",
 	"fundingUrl": "",
 	"isDesktopOnly": false
