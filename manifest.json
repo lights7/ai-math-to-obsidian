@@ -1,9 +1,9 @@
 {
 	"id": "convert-ai-math",
-	"name": "Ai Math to Obsidian",
+	"name": "Convert Ai Math",
 	"version": "1.0.7",
 	"minAppVersion": "0.15.0",
-	"description": "Converts Ai Math to Obsidian when pasting content.",
+	"description": "Converts Math in output from ChatGPT, DeepSeek, Liner, Claude, Llama and Grok when pasting content.",
 	"author": "Darko Pejakovic and lights7",
 	"authorUrl": "https://github.com/lights7",
 	"fundingUrl": "",
