@@ -1,15 +1,15 @@
 {
-	"name": "convert-katex-to-mathjax",
-	"version": "1.0.4",
-	"description": "Converts KaTeX format to MathJax format",
+	"name": "convert-ai-math",
+	"version": "1.0.7",
+	"description": "Converts Math in output from ChatGPT, DeepSeek, Liner, Claude, Llama and Grok when pasting content.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
 		"version": "node version-bump.mjs && git add manifest.json versions.json"
 	},
-	"keywords": [],
-	"author": "Darko Pejakovic",
+	"keywords": ["Equations","Math", "ChatGPT", "DeepSeek", "Liner", "Claude", "Llama", "Grok","Paste","Converstion"],
+	"author": "Darko Pejakovic and lights7",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^16.11.6",

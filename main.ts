@@ -136,7 +136,6 @@ if (input.includes("\\\\[") || input.includes("\\\\(")) { // from Liner
     }else{
        equ = 0;
     }
-
     if (len == 1 && m==0) { // this line is short equ, no equ in previous
       all=all+"\$"+p1+"\$";
       m=1;
