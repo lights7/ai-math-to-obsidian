@@ -1,6 +1,6 @@
-# Obsidian Plugin: Copy Ai Math into Obsidian
+# Obsidian Plugin: Convert Ai Math into Obsidian
 
-This is a simple plugin can copy ChatGPT, Liner and Grok's Math equations to Obsidian. 
+This is a plugin can convert ChatGPT, DeepSeek, Liner, Claude, Llama and Grok's Math equations to Obsidian while pasting content. 
 
 It was forked from Darko Pejakovic's [Convert KaTeX to MathJax plugin](https://github.com/pejakovic/obsidian-convert-katex-to-mathjax), which can copy ChatGPT 's KaTeX into Obsidian's MathJax.
 
@@ -8,9 +8,9 @@ It was forked from Darko Pejakovic's [Convert KaTeX to MathJax plugin](https://g
 
 ## **Why This Plugin?**
 
-  ChatGPT and other platforms often render mathematical expressions using [**KaTeX**](https://katex.org) or just Latex, while Obsidian uses [**MathJax**](https://www.mathjax.org) for mathematical notation. This discrepancy can lead to formatting issues when copying and pasting content.
+  ChatGPT and other Ai platforms often render mathematical expressions using [**KaTeX**](https://katex.org) or just plain Tex, while Obsidian uses [**MathJax**](https://www.mathjax.org) for mathematical notation. This discrepancy can lead to formatting issues when copying and pasting content.
 
-This plugin eliminates the hassle by automatically converting either Latex or KaTeX expressions to MathJax, making it easier to integrate ChatGPT or Grok generated content or other KaTeX-based math into your Obsidian vault.
+This plugin eliminates the hassle by automatically converting either Tex or KaTeX expressions to MathJax, making it easier to integrate Ai generated content or other Latex-based math into your Obsidian vault.
 
 ---
 
@@ -32,7 +32,7 @@ This plugin eliminates the hassle by automatically converting either Latex or Ka
 1. Download or build the plugin files (`main.js` and `manifest.json`).
 2. Copy them into your Obsidian vault directory:
    ```
-   VaultFolder/.obsidian/plugins/obsidian-convert-katex-to-mathjax/
+   VaultFolder/.obsidian/plugins/convert-ai-math-to-obsidian/
    ```
 3. Restart Obsidian.
 4. Enable the plugin in `Settings > Community Plugins`.
@@ -77,6 +77,7 @@ If you'd like to make changes or contribute:
 
 ## **Contributions**
 Contributions, suggestions, and bug reports are welcome! Feel free to submit a pull request (PR) or open an issue in the repository.
+Email me at lightruthway@gmail.com
 
 ---
 
