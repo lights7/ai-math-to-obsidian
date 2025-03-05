@@ -8,9 +8,9 @@ It was forked from Darko Pejakovic's [Convert KaTeX to MathJax plugin](https://g
 
 ## **Why This Plugin?**
 
-  ChatGPT and other Ai platforms often render mathematical expressions using [**KaTeX**](https://katex.org) or just plain Tex, while Obsidian uses [**MathJax**](https://www.mathjax.org) for mathematical notation. This discrepancy can lead to formatting issues when copying and pasting content.
+  ChatGPT and other Ai platforms often render mathematical expressions using [**KaTeX**](https://katex.org) or just plain Tex without escape characters, while Obsidian uses [**MathJax**](https://www.mathjax.org) for mathematical notation. This discrepancy can lead to formatting issues when copying and pasting content.
 
-This plugin eliminates the hassle by automatically converting either Tex or KaTeX expressions to MathJax, making it easier to integrate Ai generated content or other Latex-based math into your Obsidian vault.
+This plugin eliminates the hassle by automatically converting the escape characters or add it to MathJax, making it easier to integrate Ai generated content or other Latex-based math into your Obsidian vault.
 
 ---
 
