@@ -1,5 +1,6 @@
-# Obsidian Plugin: Convert Ai Math into Obsidian
+Convert Ai Math 
 
+## **Description**
 This is a plugin can convert ChatGPT, DeepSeek, Liner, Claude, Llama and Grok's Math equations to Obsidian while pasting content. 
 
 It was forked from Darko Pejakovic's [Convert KaTeX to MathJax plugin](https://github.com/pejakovic/obsidian-convert-katex-to-mathjax), which can copy ChatGPT 's KaTeX into Obsidian's MathJax.
