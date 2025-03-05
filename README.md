@@ -32,7 +32,7 @@ This plugin eliminates the hassle by automatically converting the escape charact
 1. Download or build the plugin files (`main.js` and `manifest.json`).
 2. Copy them into your Obsidian vault directory:
    ```
-   VaultFolder/.obsidian/plugins/ai_math_to_obsidian/
+   VaultFolder/.obsidian/plugins/convert-ai-math/
    ```
 3. Restart Obsidian.
 4. Enable the plugin in `Settings > Community Plugins`.
@@ -58,7 +58,7 @@ Open the Command Palette (`Ctrl + P` / `Cmd + P`) and search for the following c
 If you'd like to make changes or contribute:
 1. Clone this repository:
    ```bash
-   git clone https://github.com/lights7/ai_math_to_obsidian.git
+   git clone https://github.com/lights7/convert-ai-math.git
    ```
 2. Ensure your Node.js version is at least 16:
    ```bash
