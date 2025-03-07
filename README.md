@@ -1,4 +1,4 @@
-Convert Ai Math 
+# **Convert Ai Math**
 
 ## **Description**
 This is a plugin can convert ChatGPT, DeepSeek, Liner, Claude, Llama and Grok's Math equations to Obsidian while pasting content. 
