@@ -38,7 +38,6 @@ export default class Katex2MathjaxConverterPlugin extends Plugin {
             evt.preventDefault();
             editor.replaceSelection(convertedText);
           }
-        
       })
     );
 
@@ -94,6 +93,7 @@ export default class Katex2MathjaxConverterPlugin extends Plugin {
  */
 function convertKatexToMathJax(input: string): string {
 const terms = ["\\", "_", "^", "=", "+", "/","\∂","\√"];
+let p1="";
 if (input.includes("\\\\[") || input.includes("\\\\(")) { // from Liner 
   input = input.replace(/\\\\\((.*?)\\\\\)/g, (_match, p1) => {
     return `$${p1.trim()}$`;
@@ -121,16 +121,41 @@ if (input.includes("\\\\[") || input.includes("\\\\(")) { // from Liner
   math = 0;
   string_math_space_ratio = 0.75;
   math_string_ratio = 0.1;
+/*  all_space_len=(p1.match(new RegExp(" ", "g")) || []).length;
+  p1_no_space=p1.replaceAll(" + ", '').replaceAll(" - ",'').replaceAll(" = ",''); // remove certain space  and +-=
+  str_space_len=(p1_no_space.match(new RegExp(" ", "g")) || []).length;
+  slash_num=(p1_no_space.match(/\\/g) || []).length;
+  sub_num=(p1_no_space.match(/\_/g) || []).length;
+  console.log(p1_no_space,str_space_len,all_space_len,slash_num,sub_num,len)
+*/
+//  if(str_space_len/all_space_len>string_math_space_ratio && (slash_num+sub_num)<3){
   const lines=input.split(/\r?\n/);
   for (p1 of lines) {
     len=p1.length;
-    //console.log("removed space",p1.replace(/\ +\ |\ -\ |\ =\ /g,""))
 /*    if(str_space_len/all_space_len>string_math_space_ratio && (slash_num+sub_num)<3){
       math=0;
     }else{
       math=1;
     }
 */
+    if(p1.includes("=")){
+       if(p1.includes("\\") && p1.includes("\_")){
+         math=2;
+       } else if(p1.includes("\\") || p1.includes("\_")){
+         math=2;
+       }else{
+         math=0;
+       }
+      }else{
+       if(p1.includes("\\") && p1.includes("\_")){
+         math=1;
+       } else if(p1.includes("\\") || p1.includes("\_")){
+         math=1;
+       }else{
+         math=0;
+       }
+      }
+
     if(p1.includes("=")){
        equ = 1;
     }else{
@@ -142,18 +167,26 @@ if (input.includes("\\\\[") || input.includes("\\\\(")) { // from Liner
     } else if (len < 12 && terms.some((term) => p1.includes(term))) {
       all=all+"\$"+p1+"\$";
       m=1;
-    } else if (equ == 0 && len >= 12 && len<=20 && terms.some((term) => p1.includes(term))) {
+    } else if (math == 1 && len >= 12 && len<=20 && terms.some((term) => p1.includes(term))) {
       all=all+"\$"+p1+"\$";
       m=1;
-    } else if (equ == 1 && len >= 12 && terms.some((term) => p1.includes(term))) {
+    } else if (math == 2 && len >= 12 && len<=20 && terms.some((term) => p1.includes(term))) {
+      all=all+"\$"+p1+"\$";
+      m=1;
+//    } else if (math == 2 && len >= 12 && terms.some((term) => p1.includes(term))) {
+//      all=all+p1;
+//      m=0;
+    } else if (math == 2 && len >= 12 && terms.some((term) => p1.includes(term))) {
       all=all+"\$\$"+p1+"\$\$";
       m=2;
     } else { // this line is not equation
-        all=all+p1;
+//      if(math>0){console.log("p1",p1)}
+        all=all+p1+'\n\n';
       m=0
     }
   }
-
+  input = all;
+  return input;
 }else{ // input from Llama and Claude
   m=0; // previous line is equ if 1, no math equ if 0
   all=""
@@ -170,7 +203,7 @@ if (input.includes("\\\\[") || input.includes("\\\\(")) { // from Liner
     str_space_len=(p1_no_space.match(new RegExp(" ", "g")) || []).length;
     slash_num=(p1_no_space.match(/\\/g) || []).length;
     sub_num=(p1_no_space.match(/\_/g) || []).length;
-    console.log(p1_no_space,str_space_len,all_space_len,slash_num,sub_num,len)
+//    console.log(p1_no_space,str_space_len,all_space_len,slash_num,sub_num,len)
     if(str_space_len/all_space_len>string_math_space_ratio && (slash_num+sub_num)<3){
       math=0;
     }else{
@@ -202,9 +235,9 @@ if (input.includes("\\\\[") || input.includes("\\\\(")) { // from Liner
         all=all+p1+'\n';
       m=0
     }
+    input=all;
+    return input; 
   };
-  input=all;
-  return input; // return Grok
 }
 }
 
