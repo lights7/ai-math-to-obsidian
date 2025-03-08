@@ -177,11 +177,13 @@ if (input.includes("\\\\[") || input.includes("\\\\(")) { // from Liner
 //      all=all+p1;
 //      m=0;
     } else if (math == 2 && len >= 12 && terms.some((term) => p1.includes(term))) {
+      if(m==0){all=all+"\n";}
       all=all+"\$\$"+p1+"\$\$";
       m=2;
     } else { // this line is not equation
 //      if(math>0){console.log("p1",p1)}
-        all=all+p1+'\n\n';
+//        all=all+p1+'\n\n';
+        all=all+p1;
       m=0
     }
   }
