@@ -1,6 +1,6 @@
 {
 	"id": "convert-ai-math",
-	"name": "Convert Ai Math",
+	"name": "Convert AI Math",
 	"version": "1.0.7",
 	"minAppVersion": "0.15.0",
 	"description": "Converts Math in output from ChatGPT, DeepSeek, Liner, Claude, Llama and Grok when pasting content.",
